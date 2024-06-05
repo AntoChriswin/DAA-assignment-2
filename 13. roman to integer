@@ -1,0 +1,35 @@
+def romanToInt(s):
+    # Map of Roman numerals to their integer values
+    roman_map = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+
+    # Initialize the total to 0
+    total = 0
+    # Initialize the previous value to a very large number
+    prev_value = float('inf')
+
+    # Iterate over each character in the Roman numeral string
+    for char in s:
+        # Get the value of the current Roman numeral symbol
+        value = roman_map[char]
+
+        # If the previous value is less than the current value, it is a subtractive combination
+        if prev_value < value:
+            # Subtract twice the previous value because it was added once before
+            total += value - 2 * prev_value
+        else:
+            # Add the value to the total
+            total += value
+
+        # Update the previous value
+        prev_value = value
+
+    return total
+print(romanToInt('X'))
