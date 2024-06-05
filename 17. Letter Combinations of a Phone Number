@@ -1,0 +1,35 @@
+def letterCombinations(digits):
+    if not digits:
+        return []
+
+    # Mapping of digits to corresponding letters
+    phone_map = {
+        '2': 'abc',
+        '3': 'def',
+        '4': 'ghi',
+        '5': 'jkl',
+        '6': 'mno',
+        '7': 'pqrs',
+        '8': 'tuv',
+        '9': 'wxyz'
+    }
+
+    result = []
+
+    def backtrack(index, path):
+        # If the path length is equal to digits length, we have a complete combination
+        if index == len(digits):
+            result.append(path)
+            return
+
+        # Get the letters that the current digit can represent
+        possible_letters = phone_map[digits[index]]
+
+        # Loop through the possible letters and recurse
+        for letter in possible_letters:
+            backtrack(index + 1, path + letter)
+
+    # Initiate backtracking from the first digit
+    backtrack(0, "")
+    return result
+print(letterCombinations("23"))
